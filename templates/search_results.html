@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Search</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+    <!-- Favicon -->
+    <link href="../static/favicon.png" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../static/style1.css" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script>
+        $(function () {
+            $('a').each(function () {
+                if ($(this).prop('href') == window.location.href) {
+                    $(this).addClass('active'); $(this).parents('li').addClass('active');
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container p-0 ">
+        {% include "nav_bar.html" %}
+    </div> <!-- Nav bar end-->
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- Page Header Start -->
+                <div class="container py-5 px-2 bg-primary sticky-div">
+                    <div class="text-right ">
+                        <div class="d-inline-flex pt-2">
+                            <h5 class="m-0 text-white">Total search results : <span class="badge badge-light">{{results | length }}</span></h5>
+                        </div>
+                    </div>
+                    <div class="row py-5 px-4">
+                        <div class="col-sm-6 text-center text-md-left">
+                            <h1 class="mb-3 mb-md-0 text-white text-uppercase font-weight-bold">Searched Users</h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- Page Header End -->
+            </div>
+        </div> <!-- Row end -->
+
+        <div class="row">
+            <div class="col-sm-3">
+                {% include 'sidebar.html' %}
+            </div> <!-- Side bar col end -->
+            <div class="col-sm-9">
+                <!-- Blog Detail Start -->
+                <div class="container py-5 px-2 bg-white">
+                    <div class="row px-4">
+                        {% if results | length ==0 %}
+                        <p><strong> Search results did not returned any registered user... Try again!!!</strong></p>
+                        {%else%}
+                        <h3><strong> Displaying your search results.... </strong></h3>
+                        <table class="table table-hover table-dark">
+                            <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Users</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for res in results %}
+                                    {%if current_user.username != res.username  %}
+                                <tr>
+                                    <td><img src="{{res.photo}}" alt="Image" class="mr-3 mt-1 rounded-circle" style="width:60px;"></td>
+                                    <td><a href="/my_profile/{{res.username}}"><i class="fas fa-user-alt" style="color: aliceblue;"></i></a> {{res.first_name}} {{res.last_name}}</td>
+                                </tr>
+                                    {% endif %}
+                                {% endfor %} 
+                            </tbody>
+                        </table>
+                        {% endif %}
+                    </div>
+                </div>
+            </div> <!-- Row end -->
+        </div>
+        <!-- Footer Start -->
+        <div class="container py-4 bg-secondary text-center">
+            <p class="m-0 text-white">
+            <h6 class="text-white font-weight-bold">&copy; Blog Lite &nbsp; Designed by: Sushmita Nandy
+                (21f1005425@student.onlinedegree.iitm.ac.in)</h6>
+            </p>
+        </div>
+        <!-- Footer End -->
+    </div>
+</body>
+
+</html>

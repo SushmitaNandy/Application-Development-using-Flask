@@ -1,0 +1,9 @@
+Flask
+Flask-SQLAlchemy
+WTForms
+Flask-WTF 
+Flask-CKEditor 
+flask-login 
+email_validator
+flask_security
+flask_jwt_extended
